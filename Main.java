@@ -5,16 +5,13 @@ public class Main {
         String direcoryName = "./src/songs";
         String fileName = "./src/songs/it_sings_about.txt";
 
-        Collection fileСollection = new GettingListOfFiles().getListFiles(direcoryName);
+        Collection fileСollection = new FileDirectoryManager().getListFiles(direcoryName);
 
-        WordStat frequentWordStat = new WordStat();
-        new ReadingFilesCollectionData(frequentWordStat).readFilesData(fileСollection);
+        WordFrequencyHandler wordFrequentHandler = new WordFrequencyHandler();
+        new CollectionReaderManager(new FileReaderManager(wordFrequentHandler))
+                .readFilesData(fileСollection);
 
-        List<Map.Entry<String, Integer>> topLIst = frequentWordStat.getTopFrequentWords(10);
-        new WritingDataToFile().writeMapCollectionToFile(topLIst, fileName);
+        CollectionTransmitter topLIst = wordFrequentHandler.getTopFrequentWords(10);
+        new FileWriterManager().writeMapCollectionToFile(topLIst, fileName);
     }
-
-
-
-
 }

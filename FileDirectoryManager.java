@@ -2,7 +2,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GettingListOfFiles {
+public class FileDirectoryManager {
 
     public List<File> getListFiles(String pathToDirectory) {
         File directory = new File(pathToDirectory);

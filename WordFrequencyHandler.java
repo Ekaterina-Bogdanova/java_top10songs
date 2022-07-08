@@ -1,14 +1,14 @@
 import java.util.*;
 
-public class WordStat implements DataСonsumer{
+public class WordFrequencyHandler implements LineHandler {
     private Map<String, Integer> mapWords = new HashMap<>();
 
     @Override
-    public void getReadData(String str) {
-        addWordsFromString(str);
+    public void handle(String line) {
+        addWordsFromString(line);
     };
 
-    public void addWordsFromString(String str) {
+    private void addWordsFromString(String str) {
         String[] words = str.toLowerCase().replaceAll("[^a-zа-яё\\s]", "").split("\\s+");
 
         for (String word : words) {
@@ -26,9 +26,9 @@ public class WordStat implements DataСonsumer{
         return list;
     }
 
-    public List<Map.Entry<String, Integer>> getTopFrequentWords(int wordCount) {
-        List<Map.Entry<String, Integer>> topList = sortByDecreasingFrequency();
-        return topList.subList(0, wordCount);
+    public CollectionTransmitter getTopFrequentWords(int wordCount) {
+        List<Map.Entry<String, Integer>> list = sortByDecreasingFrequency();
+        return new CollectionTransmitter(list.subList(0, wordCount));
     }
 
 }
