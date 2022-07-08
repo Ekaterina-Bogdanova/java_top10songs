@@ -8,10 +8,10 @@ public class Main {
         Collection fileСollection = new FileDirectoryManager().getListFiles(direcoryName);
 
         WordFrequencyHandler wordFrequentHandler = new WordFrequencyHandler();
-        new CollectionReaderManager(new FileReaderManager(wordFrequentHandler))
+        new DirectoryReader(new ReadingService(wordFrequentHandler))
                 .readFilesData(fileСollection);
 
-        CollectionTransmitter topLIst = wordFrequentHandler.getTopFrequentWords(10);
-        new FileWriterManager().writeMapCollectionToFile(topLIst, fileName);
+        List<WordFrequencyDto> topLIst = wordFrequentHandler.getTopFrequentWords(10);
+        new WritingService().writeMapCollectionToFile(topLIst, fileName);
     }
 }

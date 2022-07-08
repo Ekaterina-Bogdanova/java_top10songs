@@ -16,19 +16,23 @@ public class WordFrequencyHandler implements LineHandler {
         }
     }
 
-    public CollectionTransmitter sortByDecreasingFrequency() {
-        List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(mapWords.entrySet());
+    public List<WordFrequencyDto> sortByDecreasingFrequency() {
+        List<WordFrequencyDto> list = new LinkedList<>();
 
-        Collections.sort(list, (Map.Entry<String, Integer> item1, Map.Entry<String, Integer> item2) -> {
-                return (item2.getValue()).compareTo(item1.getValue());
+        for (Map.Entry<String, Integer> item : mapWords.entrySet()) {
+            list.add(new WordFrequencyDto(item.getKey(), item.getValue()));
+        }
+
+        Collections.sort(list, (WordFrequencyDto item1, WordFrequencyDto item2) -> {
+            return (item2.getFrequency()).compareTo(item1.getFrequency());
         });
 
-        return new CollectionTransmitter(list);
+        return list;
     }
 
-    public CollectionTransmitter getTopFrequentWords(int wordCount) {
-        List<Map.Entry<String, Integer>> list = (List)sortByDecreasingFrequency().getData();
-        return new CollectionTransmitter(list.subList(0, wordCount));
+    public List<WordFrequencyDto> getTopFrequentWords(int wordCount) {
+        List<WordFrequencyDto> list = sortByDecreasingFrequency();
+        return list.subList(0, wordCount);
     }
 
 }

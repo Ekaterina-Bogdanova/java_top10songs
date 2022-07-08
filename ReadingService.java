@@ -3,9 +3,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class FileReaderManager {
+public class ReadingService {
     private LineHandler lineHandler;
-    public FileReaderManager(LineHandler lineHandler) {
+    public ReadingService(LineHandler lineHandler) {
          this.lineHandler = lineHandler;
      }
 
